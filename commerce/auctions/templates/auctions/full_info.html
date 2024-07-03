@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+<h5><a href="{%url 'make_comments' %}" >Make Comments</a></h5>
+{%for bid in bids %}
+ID: <h4>{{bid.UID}}</h4>
+<div id="auction-card">
+{%if bid.image %}
+<img style="width:100px;" src="{{bid.image.url}}" alt="{{bid.title}}"/>
+{% endif %}
+<br/>
+<h5>By {{bid.username}}</h5>
+<h6 >Title:</h6>{{bids.title}}
+<h6>Current Bid:</h6>{{bid.starting_bid}}
+<h6 >Description:</h6> {{bid.full_Description}}
+<h6>Contact Email of {{bid.username}}</h6>{{bid.Contact_ID}}
+{% endfor %}
+<h4>Comments:</h4>
+{%if comments%}
+{%for comment in comments %}
+<br/>
+By:
+<br/>
+{{comment.username}}
+<br/>
+{{comment.comment|safe}}
+<hr/>
+{% endfor %}
+{% endif %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>Watchlist</h1>
+<hr/>
+<h4>Remove from watchlist</h4>
+{%if error %}
+{{error}}
+<br/>
+{%endif%}
+Enter its ID here:
+<form action="{% url 'remove_from_watchlist' %}" method="POST">
+    {%csrf_token%}
+    <input type="text" name="removewatchlist"/>
+    </form>
+<hr/>
+{%for item in watchlist%}
+ID :: <h4><a href="/{{item.UID}}">{{item.UID}}</a></h4></h4>
+{%if item.Image %}
+<img style="width:50px;" src="{{item.Image.url}}" alt="{{item.Title}}"/>
+{% endif %}
+<h6>By:</h6>{{item.Username}}
+<h6>Title:</h6>{{item.Title}}
+<h6>Description:</h6>{{item.Description}}
+<h6>Starting Bid:</h6>{{item.Starting_bid}}
+<hr/>
+{%endfor%}
+{%endblock%}

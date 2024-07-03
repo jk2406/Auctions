@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    
+
+{% if user.is_authenticated %}
+{%if error%}
+<h2>{{error}}</h2>
+{%elif success%}
+{{success}}
+{% endif %}
+
+<h4>Add to watchlist</h4>
+Enter its ID here:
+<form action="{% url 'add_to_watchlist' %}" method="POST">
+    {%csrf_token%}
+    <input type="text" name="addwatchlist"/>
+    </form>
+{% endif %}
+<hr/>
+<h2>Active Listings</h2>
+
+{%for bid in bids%}
+{% if user.is_authenticated %}
+ID: <h4><a href="/{{bid.UID}}">{{bid.UID}}</a></h4>
+{%endif%}
+<div id="auction-card">
+{%if bid.image %}
+<img style="width:50px;" src="{{bid.image.url}}" alt="{{bid.title}}"/>
+{% endif %}
+<br/>
+<h5>By {{bid.username}}</h5>
+<h6 >Title:</h6>{{bid.title}}
+<h6>Starting Bid:</h6>{{bid.starting_bid}}
+{% if bid_user %}
+(by {{bid_user}})
+{% endif %}
+<h6 >Description:</h6> {{bid.short_description}}
+
+
+<hr>
+</div>
+{%endfor%}
+{% endblock %}

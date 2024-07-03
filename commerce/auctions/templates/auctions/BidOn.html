@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>BID</h1>
+{%if error%}
+<h2>{{error}}</h2>
+{%endif%}
+<form action = "{%url 'bid_on' %}" method="POST">
+    {%csrf_token%}
+    Enter its ID:
+    <input style="margin-left: 81px;margin-bottom: 10px;" name="bid_id" type="text" />
+    <br/>
+    Enter New Bid amount:
+    <input name="bid_bid"type="integer"/>(must be greater than previous one)
+    <br/>
+    <input type="submit"  value="Bid">
+    
+</form>
+<hr/>
+<h2>Active Listings</h2>
+
+{%for bid in bids%}
+ID: <h4>{{bid.UID}}</h4>
+<div id="auction-card">
+{%if bid.image %}
+<img style="width:50px;" src="{{bid.image.url}}" alt="{{bid.title}}"/>
+{% endif %}
+<br/>
+<h5>By {{bid.username}}</h5>
+<h6 >Title:</h6>{{bid.title}}
+<h6>Starting Bid:</h6>{{bid.starting_bid}}
+<h6 >Description:</h6> {{bid.description}}
+<hr/>
+{%endfor%}
+{%endblock%}

@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="p-8 flex flex-col items-center">
+    <h1 class="font-medium leading-tight text-4xl mt-0 mb-4 text-blue-600">Create Your bid here</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <input  type="submit" value="Create"/>
+    </form>
+    <br/>
+    
+</div>
+{% endblock %}

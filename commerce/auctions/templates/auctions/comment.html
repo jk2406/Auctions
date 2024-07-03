@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<form action="{%url 'make_comments' %}" method="post">
+{%csrf_token%}
+Enter ID:
+<input type="text" name="comment_of_particular">
+<br/>
+Your Comment:
+
+<br/>
+<textarea style="margin-bottom: 10px;width: 10cm;height: 10cm;"name="comments_bids" maxlength="9999999"></textarea>
+<input type="submit">
+</form>
+{% endblock %}
